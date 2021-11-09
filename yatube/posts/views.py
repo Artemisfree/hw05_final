@@ -40,10 +40,12 @@ def group_posts(request, slug):
     return render(request, template, context)
 
 
-@login_required
 def profile(request, username):
     template = 'posts/profile.html'
-    user = request.user
+    if request.user.is_anonymous:
+        user = None
+    else:
+        user = request.user
     author = get_object_or_404(User, username=username)
     following = Follow.objects.filter(user=user, author=author).exists()
     posts = Post.objects.filter(author=author)
@@ -57,6 +59,7 @@ def profile(request, username):
         'counter': counter,
         'page_obj': page_obj,
         'following': following,
+        'paginator': paginator,
     }
     return render(request, template, context)
 
@@ -154,6 +157,7 @@ def follow_index(request):
         'page_obj': page_obj,
         'posts': posts,
         'title': title,
+        'paginator': paginator,
     }
     return render(request, template, context)
 
@@ -161,9 +165,10 @@ def follow_index(request):
 @login_required
 def profile_follow(request, username):
     user = request.user
-    print(user)
     author = get_object_or_404(User, username=username)
-    Follow.objects.create(user=user, author=author)
+    if user != author and not Follow.objects.filter(user=user, author=author):
+        Follow.objects.create(user=user, author=author)
+        return redirect('posts:profile', username=request.user)
     return redirect('posts:profile', username=request.user)
 
 

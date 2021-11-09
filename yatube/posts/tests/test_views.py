@@ -264,7 +264,9 @@ class FollowingTestViewsTest(TestCase):
         )
 
     def test_following_author(self):
-        response = self.authorized_client.get(self.url_follow, follow=True)
+        if self.author != self.user:
+            response = self.authorized_client.get(self.url_follow, follow=True)
+            self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
         self.assertTrue(
