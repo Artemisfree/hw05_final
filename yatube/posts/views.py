@@ -49,14 +49,12 @@ def profile(request, username):
     author = get_object_or_404(User, username=username)
     following = Follow.objects.filter(user=user, author=author).exists()
     posts = Post.objects.filter(author=author)
-    counter = posts.count()
     paginator = Paginator(posts, settings.NUMBER_OF_POSTS)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
         'author': author,
         'posts': posts,
-        'counter': counter,
         'page_obj': page_obj,
         'following': following,
         'paginator': paginator,
@@ -120,7 +118,6 @@ def post_edit(request, post_id):
         return redirect('posts:post_detail', post_id=post.id)
     if request.user != post.author:
         return redirect('posts:post_detail', post_id=post.id)
-    # form = PostForm(instance=post)
     context = {
         'post': post,
         'form': form,

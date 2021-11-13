@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 {% load thumbnail %}
 <!DOCTYPE html>
@@ -46,7 +46,7 @@
               <img class="card-img my-2" src="{{ im.url }}">
             {% endthumbnail %}
             <p>
-              {{ post.text }}
+              {{ post.text|linebreaks }}
             </p>
              <!-- эта кнопка видна только автору -->
             {% if user == post.author %}
@@ -83,7 +83,7 @@
                     {% endif %}
                   </h5>
                     <p>
-                      {{ comment.text }}
+                      {{ comment.text|linebreaks }}
                     </p>
                   </div>
                 </div>

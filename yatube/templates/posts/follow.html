@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 {% load thumbnail %}
 <!DOCTYPE html>
@@ -30,7 +30,7 @@
                 <img class="card-img my-2" src="{{ im.url }}">
               {% endthumbnail %}
               
-              <p>{{ post.text }}</p>
+              <p>{{ post.text|linebreaks }}</p>
               <a href="{% url 'posts:post_detail' post.id %}">подробная информация</a>
 
               {% if post.group %}

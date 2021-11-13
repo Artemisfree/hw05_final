@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 {% load thumbnail %}
 <!DOCTYPE html>
@@ -50,7 +50,7 @@
               {% endthumbnail %}  
                           
               <p>
-                {{ post.text }}
+                {{ post.text|linebreaks }}
               </p>
               <a href="{% url 'posts:post_detail' post.id %}">подробная информация </a><br>
           </article>
