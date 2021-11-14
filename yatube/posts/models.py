@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.deletion import CASCADE
 
@@ -81,6 +82,12 @@ class Follow(models.Model):
         on_delete=CASCADE,
         related_name='following',
     )
+
+    def clean(self):
+        if self.user == self.author:
+            raise ValidationError(
+                'author and user should be different'
+            )
 
     class Meta:
         models.UniqueConstraint(

@@ -67,13 +67,13 @@ def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post_text = post.text[:30]
     author = post.author
-    counter = Post.objects.filter(author=author).count()
+    posts = Post.objects.filter(author=author)
     comments = Comment.objects.filter(post=post)
     comment_form = CommentForm(request.POST or None)
     context = {
         'post': post,
+        'posts': posts,
         'post_text': post_text,
-        'counter': counter,
         'comments': comments,
         'comment_form': comment_form,
     }
