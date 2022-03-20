@@ -1,3 +1,17 @@
 # hw05_final
 
-[![CI](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml)
+## Описание
+Часть проекта yatube - социальная сеть, для публикации дневников Произведения делятся на несколько категорий. Список категорий может быть расширен администратором.
+Основа без API.
+Есть покрытие тестами.
+
+## Технологии в проекте 
+* Python
+* Django Rest Framework
+
+## Запуск проекта
+1. Клонировать репозиторий и перейти в него в командной строке
+2. Cоздать и активировать виртуальное окружение
+3. Установить зависимости из файла requirements.txt
+4. Выполнить миграции
+5. Запустить проект
